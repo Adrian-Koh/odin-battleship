@@ -6,9 +6,17 @@ test("player object is not null", () => {
   expect(player).not.toBeNull();
 });
 test("player places ships", () => {
-  player.placeCarrier([1, 1], true); // 5, horizontal
-  player.placeBattleship([3, 0], false); // 4, vertical
-  player.placeCruiser([7, 7], true); // 3, horizontal
-  player.placeSubmarine([5, 2], false); // 3, vertical
-  player.placeDestroyer([8, 0], true); // 2, horizontal
+  expect(player.placeCarrier([1, 1], true)).toBe(true);
+  expect(player.placeBattleship([3, 0], false)).toBe(true);
+  expect(player.placeCruiser([7, 7], true)).toBe(true);
+  expect(player.placeSubmarine([5, 2], false)).toBe(true);
+  expect(player.placeDestroyer([8, 0], true)).toBe(true);
+});
+
+test("placeCarrier returns false when placing ship on occupied spot", () => {
+  expect(player.placeCarrier([7, 5], true)).toBe(false);
+});
+
+test("computer places ships", () => {
+  expect(() => computer.placeComputerShips()).not.toThrow();
 });

@@ -10,7 +10,7 @@ test("gameboard receives attack on empty square", () => {
   expect(gameboard.receiveAttack([2, 2])).toBe(false);
 });
 test("gameboard throws error on attacked square", () => {
-  expect(() => gameboard.addShip([2, 2], true, new Ship(3))).toThrow(Error);
+  expect(gameboard.addShip([2, 2], true, new Ship(3))).toBe(false);
 });
 test("gameboard receives attack on square with ship", () => {
   gameboard.addShip([2, 3], true, new Ship(3));
@@ -21,13 +21,13 @@ test("gameboard receives attack on square with ship", () => {
   expect(gameboard.receiveAttack([3, 2])).toBe(false);
 });
 test("gameboard throws error when attempting to add ship to attacked square", () => {
-  expect(() => gameboard.addShip([2, 6], false, new Ship(2))).toThrow(Error);
+  expect(gameboard.addShip([2, 6], false, new Ship(2))).toBe(false);
 });
 test("gameboard throws error when attempting to add ship to occupied square", () => {
-  gameboard.addShip([5, 5], false, new Ship(2));
-  expect(() => gameboard.addShip([6, 5], false, new Ship(2))).toThrow(Error);
+  expect(gameboard.addShip([5, 5], false, new Ship(2))).toBe(true);
+  expect(gameboard.addShip([6, 5], false, new Ship(2))).toBe(false);
 });
 test("gameboard does not register ship on board if add ship fails", () => {
-  expect(() => gameboard.addShip([1, 3], false, new Ship(2))).toThrow(Error);
+  expect(gameboard.addShip([1, 3], false, new Ship(2))).toBe(false);
   expect(gameboard.receiveAttack([1, 3])).toBe(false);
 });

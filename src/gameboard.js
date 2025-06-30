@@ -9,6 +9,7 @@ export class Gameboard {
     }
   }
   addShip(coords, isHorizontal, ship) {
+    // return true if successfully added ship, false otherwise
     let reset = this.saveBoard();
     if (coords[0] < 0 || coords[0] > 9 || coords[1] < 0 || coords[1] > 9) {
       throw new Error("starting coordinate of ship passed in is invalid.");
@@ -27,9 +28,7 @@ export class Gameboard {
       for (let i = coords[1]; i < coords[1] + ship.length; i++) {
         if (this.board[coords[0]][i] !== ".") {
           this.board = reset;
-          throw new Error(
-            `The square at ${coords[0]},${i} is already occupied.`,
-          );
+          return false;
         }
 
         this.board[coords[0]][i] = "O";
@@ -38,14 +37,13 @@ export class Gameboard {
       for (let i = coords[0]; i < coords[0] + ship.length; i++) {
         if (this.board[i][coords[1]] !== ".") {
           this.board = reset;
-          throw new Error(
-            `The square at ${i},${coords[1]} is already occupied.`,
-          );
+          return false;
         }
 
         this.board[i][coords[1]] = "O";
       }
     }
+    return true;
   }
   receiveAttack(coords) {
     if (coords[0] < 0 || coords[0] > 9 || coords[1] < 0 || coords[1] > 9) {
