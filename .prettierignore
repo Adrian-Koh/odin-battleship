@@ -1,0 +1,7 @@
+# Ignore artifacts:
+node_modules
+dist
+eslint.config.mjs
+webpack.config.js
+package-lock.json
+package.json
