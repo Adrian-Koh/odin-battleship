@@ -15,8 +15,8 @@ export class Gameboard {
     }
 
     if (
-      (isHorizontal && coords[1] + ship.length > 9) ||
-      (!isHorizontal && coords[0] + ship.length > 9)
+      (isHorizontal && coords[1] + ship.length - 1 > 9) ||
+      (!isHorizontal && coords[0] + ship.length - 1 > 9)
     ) {
       throw new Error(
         "ship cannot fit in board with current starting position and length",
