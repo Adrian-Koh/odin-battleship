@@ -3,7 +3,9 @@ import { Ship } from "./ship";
 
 const gameboard = new Gameboard();
 
-test("gameboard is valid", () => expect(gameboard).not.toBeNull());
+test("gameboard is valid", () => {
+  expect(gameboard).not.toBeNull();
+});
 test("gameboard receives attack on empty square", () => {
   expect(gameboard.receiveAttack([2, 2])).toBe(false);
 });
