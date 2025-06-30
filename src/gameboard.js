@@ -1,5 +1,3 @@
-import { Ship } from "./ship";
-
 export class Gameboard {
   constructor() {
     this.board = [];
@@ -11,7 +9,7 @@ export class Gameboard {
     }
   }
   addShip(coords, isHorizontal, ship) {
-    // TODO: reset squares if error thrown
+    let reset = this.saveBoard();
     if (coords[0] < 0 || coords[0] > 9 || coords[1] < 0 || coords[1] > 9) {
       throw new Error("starting coordinate of ship passed in is invalid.");
     }
@@ -27,24 +25,29 @@ export class Gameboard {
 
     if (isHorizontal) {
       for (let i = coords[1]; i < coords[1] + ship.length; i++) {
-        if (this.board[coords[0]][i] !== ".")
+        if (this.board[coords[0]][i] !== ".") {
+          this.board = reset;
           throw new Error(
             `The square at ${coords[0]},${i} is already occupied.`,
           );
+        }
+
         this.board[coords[0]][i] = "O";
       }
     } else {
       for (let i = coords[0]; i < coords[0] + ship.length; i++) {
-        if (this.board[i][coords[1]] !== ".")
+        if (this.board[i][coords[1]] !== ".") {
+          this.board = reset;
           throw new Error(
             `The square at ${i},${coords[1]} is already occupied.`,
           );
+        }
+
         this.board[i][coords[1]] = "O";
       }
     }
   }
   receiveAttack(coords) {
-    // TODO: reset squares if error thrown
     if (coords[0] < 0 || coords[0] > 9 || coords[1] < 0 || coords[1] > 9) {
       throw new Error("received coordinates are invalid.");
     }
@@ -57,5 +60,12 @@ export class Gameboard {
       this.board[coords[0]][coords[1]] = "X";
       return false;
     }
+  }
+  saveBoard() {
+    let board = [];
+    for (const row of this.board) {
+      board.push(row.slice());
+    }
+    return board;
   }
 }
