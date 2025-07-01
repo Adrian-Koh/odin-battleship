@@ -23,6 +23,7 @@ export function setupSquareListeners(player, computer) {
     square.addEventListener("click", () => {
       if (computer.gameboard.receiveAttack([row, col])) square.innerText = "X";
       else square.innerText = ".";
+      square.classList.add("hit");
     });
   }
   for (let i = 0; i < computerSquares.length; i++) {
@@ -32,6 +33,7 @@ export function setupSquareListeners(player, computer) {
     square.addEventListener("click", () => {
       if (player.gameboard.receiveAttack([row, col])) square.innerText = "X";
       else square.innerText = ".";
+      square.classList.add("hit");
     });
   }
 }

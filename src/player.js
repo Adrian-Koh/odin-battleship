@@ -10,8 +10,8 @@ export class Player {
   }
 
   #randomizePlacement() {
-    let row = parseInt(Math.random() * 10) - 1;
-    let col = parseInt(Math.random() * 10) - 1;
+    let row = Math.floor(Math.random() * 10) - 1;
+    let col = Math.floor(Math.random() * 10) - 1;
     let isHorizontal = Math.random() > 0.5;
     return { coords: [row, col], isHorizontal };
   }
