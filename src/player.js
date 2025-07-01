@@ -18,6 +18,9 @@ export class Player {
   }
 
   #randomizePlacement() {
+    if (this.#isHuman)
+      throw new Error("cannot call randomizePlacement for human player.");
+
     let row = Math.floor(Math.random() * 10);
     let col = Math.floor(Math.random() * 10);
     let isHorizontal = Math.random() > 0.5;
@@ -25,6 +28,9 @@ export class Player {
   }
 
   placeComputerShips() {
+    if (this.#isHuman)
+      throw new Error("cannot call placeComputerShips for human player.");
+
     let obj;
     do {
       obj = this.#randomizePlacement();
@@ -68,6 +74,9 @@ export class Player {
   }
 
   computerMove() {
+    if (this.#isHuman)
+      throw new Error("cannot call computerMove for human player.");
+
     let obj;
     do {
       obj = this.#randomizePlacement();

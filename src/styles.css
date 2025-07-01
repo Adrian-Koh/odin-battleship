@@ -53,3 +53,8 @@ body {
     background-color: red;
     color: white;
 }
+
+.ship-hit {
+    background-color: green;
+    color: white;
+}
