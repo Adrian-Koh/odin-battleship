@@ -77,6 +77,12 @@ document.querySelector("#start-game").addEventListener("click", () => {
   computer.placeComputerShips();
 
   document.querySelector("#new-game-form").style.display = "none";
+  clearBoards();
   populateGrids();
   setupSquareListeners(player, computer);
 });
+
+function clearBoards() {
+  document.querySelector("#player-board").innerHTML = "";
+  document.querySelector("#computer-board").innerHTML = "";
+}
