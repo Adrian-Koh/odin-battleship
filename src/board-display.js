@@ -19,7 +19,7 @@ export function setupSquareListeners(player, computer) {
     let col = i % 10;
     const square = computerSquares[i];
     square.addEventListener("click", () => {
-      attackSquare([row, col], computer, square);
+      if (!attackSquare([row, col], computer, square)) return;
 
       let computerMove = computer.computerMove();
       let playerSquare =
@@ -35,11 +35,16 @@ export function setupSquareListeners(player, computer) {
 }
 
 function attackSquare(coords, attackedPlayer, square) {
-  if (attackedPlayer.receiveAttack(coords)) {
-    square.innerText = "X";
-    square.classList.add("ship-hit");
-  } else {
-    square.innerText = ".";
-    square.classList.add("hit");
+  try {
+    if (attackedPlayer.receiveAttack(coords)) {
+      square.innerText = "X";
+      square.classList.add("ship-hit");
+    } else {
+      square.classList.add("hit");
+    }
+  } catch (error) {
+    alert(error.message);
+    return false;
   }
+  return true;
 }
