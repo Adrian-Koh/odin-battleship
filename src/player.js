@@ -2,8 +2,10 @@ import { Gameboard } from "./gameboard";
 import { Ship } from "./ship";
 
 export class Player {
+  #isHuman;
+
   constructor(isHuman = true) {
-    this.isHuman = isHuman;
+    this.#isHuman = isHuman;
     this.gameboard = new Gameboard();
   }
 

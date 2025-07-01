@@ -9,3 +9,29 @@ export function populateGrids() {
     computerBoard.appendChild(square.cloneNode(false));
   }
 }
+
+export function setupSquareListeners(player, computer) {
+  const playerBoard = document.querySelector("#player-board");
+  const computerBoard = document.querySelector("#computer-board");
+  const playerSquares = playerBoard.children;
+  const computerSquares = computerBoard.children;
+
+  for (let i = 0; i < playerSquares.length; i++) {
+    let row = Math.floor(i / 10);
+    let col = i % 10;
+    const square = playerSquares[i];
+    square.addEventListener("click", () => {
+      if (computer.gameboard.receiveAttack([row, col])) square.innerText = "X";
+      else square.innerText = ".";
+    });
+  }
+  for (let i = 0; i < computerSquares.length; i++) {
+    let row = Math.floor(i / 10);
+    let col = i % 10;
+    const square = computerSquares[i];
+    square.addEventListener("click", () => {
+      if (player.gameboard.receiveAttack([row, col])) square.innerText = "X";
+      else square.innerText = ".";
+    });
+  }
+}
