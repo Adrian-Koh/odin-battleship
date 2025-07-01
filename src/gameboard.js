@@ -1,4 +1,8 @@
 export class Gameboard {
+  #ships = [];
+  #sunkShipCount = 0;
+  #gameOver = false;
+
   constructor() {
     this.board = [];
     for (let i = 0; i < 10; i++) {
@@ -10,7 +14,7 @@ export class Gameboard {
   }
   addShip(coords, isHorizontal, ship) {
     // return true if successfully added ship, false otherwise
-    let reset = this.saveBoard();
+    let reset = this.#saveBoard();
     if (coords[0] < 0 || coords[0] > 9 || coords[1] < 0 || coords[1] > 9) {
       throw new Error("starting coordinate of ship passed in is invalid.");
     }
@@ -29,7 +33,7 @@ export class Gameboard {
           return false;
         }
 
-        this.board[coords[0]][i] = "O";
+        this.board[coords[0]][i] = this.#ships.length.toString();
       }
     } else {
       for (let i = coords[0]; i < coords[0] + ship.length; i++) {
@@ -38,9 +42,10 @@ export class Gameboard {
           return false;
         }
 
-        this.board[i][coords[1]] = "O";
+        this.board[i][coords[1]] = this.#ships.length.toString();
       }
     }
+    this.#ships.push(ship);
     return true;
   }
   receiveAttack(coords) {
@@ -49,19 +54,33 @@ export class Gameboard {
     }
     if (this.board[coords[0]][coords[1]] === "X") {
       throw new Error("this square has already been hit.");
-    } else if (this.board[coords[0]][coords[1]] === "O") {
-      this.board[coords[0]][coords[1]] = "X";
-      return true;
-    } else {
+    } else if (this.board[coords[0]][coords[1]] === ".") {
       this.board[coords[0]][coords[1]] = "X";
       return false;
+    } else {
+      this.#hitShip(coords);
+      return true;
     }
   }
-  saveBoard() {
+  #hitShip(coords) {
+    let shipIndex = parseInt(this.board[coords[0]][coords[1]]);
+    this.#ships[shipIndex].hit();
+    this.board[coords[0]][coords[1]] = "X";
+    if (this.#ships[shipIndex].isSunk()) {
+      this.#sunkShipCount++;
+    }
+    if (this.#sunkShipCount === this.#ships.length) {
+      this.#gameOver = true;
+    }
+  }
+  #saveBoard() {
     let board = [];
     for (const row of this.board) {
       board.push(row.slice());
     }
     return board;
+  }
+  isGameOver() {
+    return this.#gameOver;
   }
 }

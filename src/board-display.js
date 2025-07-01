@@ -30,6 +30,9 @@ export function setupSquareListeners(player, computer) {
       if (player.receiveAttack(computerMove)) playerSquare.innerText = "X";
       else playerSquare.innerText = ".";
       playerSquare.classList.add("hit");
+
+      if (computer.hasLost()) alert("You win!");
+      if (player.hasLost()) alert("Computer wins!");
     });
   }
 }

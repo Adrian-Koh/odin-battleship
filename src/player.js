@@ -90,4 +90,8 @@ export class Player {
   receiveAttack(coords) {
     return this.#gameboard.receiveAttack(coords);
   }
+
+  hasLost() {
+    return this.#gameboard.isGameOver();
+  }
 }
