@@ -41,11 +41,37 @@ document.querySelector("#start-game").addEventListener("click", () => {
   const destroyerHor = document.querySelector("#destroyer-horizontal").checked;
 
   player = new Player(true);
-  player.placeCarrier([carrierRow, carrierCol], carrierHor);
-  player.placeBattleship([battleshipRow, battleshipCol], battleshipHor);
-  player.placeCruiser([cruiserRow, cruiserCol], cruiserHor);
-  player.placeSubmarine([submarineRow, submarineCol], submarineHor);
-  player.placeDestroyer([destroyerRow, destroyerCol], destroyerHor);
+
+  if (!player.placeCarrier([carrierRow, carrierCol], carrierHor)) {
+    alert(
+      "Failed to place carrier (due to exceeding board or overlap), please enter new coordinates.",
+    );
+    return;
+  }
+  if (!player.placeBattleship([battleshipRow, battleshipCol], battleshipHor)) {
+    alert(
+      "Failed to place battleship (due to exceeding board or overlap), please enter new coordinates.",
+    );
+    return;
+  }
+  if (!player.placeCruiser([cruiserRow, cruiserCol], cruiserHor)) {
+    alert(
+      "Failed to place cruiser (due to exceeding board or overlap), please enter new coordinates.",
+    );
+    return;
+  }
+  if (!player.placeSubmarine([submarineRow, submarineCol], submarineHor)) {
+    alert(
+      "Failed to place submarine (due to exceeding board or overlap), please enter new coordinates.",
+    );
+    return;
+  }
+  if (!player.placeDestroyer([destroyerRow, destroyerCol], destroyerHor)) {
+    alert(
+      "Failed to place destroyer (due to exceeding board or overlap), please enter new coordinates.",
+    );
+    return;
+  }
 
   computer = new Player(false);
   computer.placeComputerShips();
