@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+15&display=swap"
+      rel="stylesheet"
+    />
+    <title>Battleship</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <div id="title">Battleship</div>
+    <button id="new-game">New game</button>
+    <div id="game-container">
+      <div id="player-container" class="board-container">
+        <div id="player-title" class="board-title">Player</div>
+        <div id="player-board" class="board"></div>
+      </div>
+      <div id="computer-container" class="board-container">
+        <div id="computer-title" class="board-title">Computer</div>
+        <div id="computer-board" class="board"></div>
+      </div>
+    </div>
+    <form id="new-game-form">
+      <div class="form-row">
+        <p>Carrier position:</p>
+        <label for="carrier-row"
+          >row: <input type="number" id="carrier-row" min="0" max="9"
+        /></label>
+        <label for="carrier-col"
+          >column: <input type="number" id="carrier-col" min="0" max="9"
+        /></label>
+        <label for="carrier-horizontal"
+          >is horizontal: <input type="checkbox" id="carrier-horizontal"
+        /></label>
+      </div>
+      <div class="form-row">
+        <p>Battleship position:</p>
+        <label for="battleship-row"
+          >row: <input type="number" id="battleship-row" min="0" max="9"
+        /></label>
+        <label for="battleship-col"
+          >column: <input type="number" id="battleship-col" min="0" max="9"
+        /></label>
+        <label for="battleship-horizontal"
+          >is horizontal: <input type="checkbox" id="battleship-horizontal"
+        /></label>
+      </div>
+      <div class="form-row">
+        <p>Cruiser position:</p>
+        <label for="cruiser-row"
+          >row: <input type="number" id="cruiser-row" min="0" max="9"
+        /></label>
+        <label for="cruiser-col"
+          >column: <input type="number" id="cruiser-col" min="0" max="9"
+        /></label>
+        <label for="cruiser-horizontal"
+          >is horizontal: <input type="checkbox" id="cruiser-horizontal"
+        /></label>
+      </div>
+      <div class="form-row">
+        <p>Submarine position:</p>
+        <label for="submarine-row"
+          >row: <input type="number" id="submarine-row" min="0" max="9"
+        /></label>
+        <label for="submarine-col"
+          >column: <input type="number" id="submarine-col" min="0" max="9"
+        /></label>
+        <label for="submarine-horizontal"
+          >is horizontal: <input type="checkbox" id="submarine-horizontal"
+        /></label>
+      </div>
+      <div class="form-row">
+        <p>Destroyer position:</p>
+        <label for="destroyer-row"
+          >row: <input type="number" id="destroyer-row" min="0" max="9"
+        /></label>
+        <label for="destroyer-col"
+          >column: <input type="number" id="destroyer-col" min="0" max="9"
+        /></label>
+        <label for="destroyer-horizontal"
+          >is horizontal: <input type="checkbox" id="destroyer-horizontal"
+        /></label>
+      </div>
+      <button id="start-game">Start game</button>
+    </form>
+  </body>
+</html>
