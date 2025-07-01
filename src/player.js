@@ -86,4 +86,8 @@ export class Player {
   isSquareChosen(coords) {
     return this.#movesMade[coords[0]][coords[1]];
   }
+
+  receiveAttack(coords) {
+    return this.#gameboard.receiveAttack(coords);
+  }
 }
