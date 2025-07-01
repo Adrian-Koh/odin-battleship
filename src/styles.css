@@ -2,6 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 #title {
@@ -57,4 +58,56 @@ body {
 .ship-hit {
     background-color: green;
     color: white;
+}
+
+#new-game-form {
+    display: none;
+    position: absolute;
+    top: 5vh;
+    left: 0; 
+    right: 0; 
+    margin-inline: auto; 
+    width: fit-content;
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    border: solid 3px white;
+    padding: 10px;
+    flex-direction: column;
+    align-items: stretch;
+
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    border: solid 2px white;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.form-row p {
+    grid-row: 1/4;
+    grid-column: 1/2;
+}
+
+.form-row label {
+    margin-left: auto;
+}
+
+.form-row input {
+    border-radius: 3px;
+    border: none;
+    width: 1.5rem;
+}
+
+#start-game {
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    color: black;
+    font-size: 16px;
+    align-self: center;
 }

@@ -2,6 +2,14 @@ import "./styles.css";
 import { populateGrids, setupSquareListeners } from "./board-display";
 import { Player } from "./player";
 
+document.querySelector("#new-game").addEventListener("click", () => {
+  document.querySelector("#new-game-form").style.display = "flex";
+});
+
+document.querySelector("#start-game").addEventListener("click", () => {
+  // place ships
+});
+
 const player = new Player(true);
 const computer = new Player(false);
 player.placeCarrier([0, 0], true);
