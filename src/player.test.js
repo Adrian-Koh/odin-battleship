@@ -20,3 +20,23 @@ test("placeCarrier returns false when placing ship on occupied spot", () => {
 test("computer places ships", () => {
   expect(() => computer.placeComputerShips()).not.toThrow();
 });
+
+test("move made by computer is registered", () => {
+  let coords = computer.computerMove();
+  expect(computer.isSquareChosen(coords)).toBe(true);
+});
+
+test("move made by player is registered", () => {
+  let coords = [2, 2];
+  expect(player.isSquareChosen(coords)).toBe(false);
+  player.chooseSquare(coords);
+  expect(player.isSquareChosen(coords)).toBe(true);
+});
+
+test("player cannot make the same move twice", () => {
+  let coords = [3, 3];
+  expect(player.isSquareChosen(coords)).toBe(false);
+  player.chooseSquare(coords);
+  expect(player.isSquareChosen(coords)).toBe(true);
+  expect(() => player.chooseSquare(coords)).toThrow(Error);
+});

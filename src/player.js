@@ -3,15 +3,23 @@ import { Ship } from "./ship";
 
 export class Player {
   #isHuman;
+  #movesMade = [];
+  #gameboard;
 
   constructor(isHuman = true) {
     this.#isHuman = isHuman;
-    this.gameboard = new Gameboard();
+    this.#gameboard = new Gameboard();
+    for (let i = 0; i < 10; i++) {
+      this.#movesMade.push([]);
+      for (let j = 0; j < 10; j++) {
+        this.#movesMade[i].push(false);
+      }
+    }
   }
 
   #randomizePlacement() {
-    let row = Math.floor(Math.random() * 10) - 1;
-    let col = Math.floor(Math.random() * 10) - 1;
+    let row = Math.floor(Math.random() * 10);
+    let col = Math.floor(Math.random() * 10);
     let isHorizontal = Math.random() > 0.5;
     return { coords: [row, col], isHorizontal };
   }
@@ -40,22 +48,42 @@ export class Player {
   }
 
   placeCarrier(coords, isHorizontal) {
-    return this.gameboard.addShip(coords, isHorizontal, new Ship(5));
+    return this.#gameboard.addShip(coords, isHorizontal, new Ship(5));
   }
 
   placeBattleship(coords, isHorizontal) {
-    return this.gameboard.addShip(coords, isHorizontal, new Ship(4));
+    return this.#gameboard.addShip(coords, isHorizontal, new Ship(4));
   }
 
   placeCruiser(coords, isHorizontal) {
-    return this.gameboard.addShip(coords, isHorizontal, new Ship(3));
+    return this.#gameboard.addShip(coords, isHorizontal, new Ship(3));
   }
 
   placeSubmarine(coords, isHorizontal) {
-    return this.gameboard.addShip(coords, isHorizontal, new Ship(3));
+    return this.#gameboard.addShip(coords, isHorizontal, new Ship(3));
   }
 
   placeDestroyer(coords, isHorizontal) {
-    return this.gameboard.addShip(coords, isHorizontal, new Ship(2));
+    return this.#gameboard.addShip(coords, isHorizontal, new Ship(2));
+  }
+
+  computerMove() {
+    let obj;
+    do {
+      obj = this.#randomizePlacement();
+    } while (this.isSquareChosen(obj.coords));
+    this.chooseSquare(obj.coords);
+    return obj.coords;
+  }
+
+  chooseSquare(coords) {
+    if (this.isSquareChosen(coords))
+      throw new Error("This square has already been chosen");
+
+    this.#movesMade[coords[0]][coords[1]] = true;
+  }
+
+  isSquareChosen(coords) {
+    return this.#movesMade[coords[0]][coords[1]];
   }
 }
